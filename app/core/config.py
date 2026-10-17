@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     debug: bool = False
     api_prefix: str = "/api/v1"
     cors_origins: list[str] = ["*"]
+    database_url: str = "sqlite:///./app.db"
 
     # API dane.um.warszawa.pl
     api_key: str = ""
