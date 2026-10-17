@@ -60,10 +60,12 @@ Backend API oparte o FastAPI i SQLAlchemy (baza SQLite). Projekt udostępnia end
 4. Uruchom serwer deweloperski:
 
    ```bash
-   uvicorn app.main:app --reload
+   uvicorn app.main:app --reload --port 3001
    ```
 
-   Aplikacja będzie dostępna pod adresem `http://127.0.0.1:8000`.
+   albo `python -m app.main`. Aplikacja będzie dostępna pod adresem `http://127.0.0.1:3001`.
+
+   Frontend z mapą (Vite, `http://localhost:5173`) pobiera boiska z `GET /api/boiska`. Dane pochodzą z pliku `boiska.db` w katalogu głównym repo; odświeżysz je skryptem `scripts/etl_boiska.py` (wymaga zmiennej `WARSAW_API_KEY`).
 
    Tabele bazy danych tworzą się automatycznie przy starcie aplikacji.
 
