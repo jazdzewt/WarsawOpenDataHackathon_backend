@@ -35,8 +35,15 @@ class UmApiClient:
             raise UmApiError(f"{action}: {exc}") from exc
 
         # Odpowiedź to lista rekordów; na wszelki wypadek obsługujemy też {"result": [...]}
+        # Słownik bez znanych kluczy (np. komunikat błędu) nie może być cicho zamieniony
+        # na pustą listę, bo wyglądałoby to jak brak danych zamiast awarii API.
         if isinstance(payload, dict):
-            payload = payload.get("result", payload.get("data", []))
+            if "result" in payload:
+                payload = payload["result"]
+            elif "data" in payload:
+                payload = payload["data"]
+            else:
+                raise UmApiError(f"{action}: nieoczekiwany format odpowiedzi")
         if not isinstance(payload, list):
             raise UmApiError(f"{action}: nieoczekiwany format odpowiedzi")
 

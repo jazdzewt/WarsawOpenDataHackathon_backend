@@ -12,7 +12,7 @@ from app.services.geocoding import GeoPoint
 from app.services.um_api import UmApiError, um_api
 
 client = TestClient(app)
-SAMPLES = Path(__file__).resolve().parents[1]  # przykładowe odpowiedzi API
+SAMPLES = Path(__file__).resolve().parent / "fixtures"  # przykładowe odpowiedzi API
 
 POINTS = {
     "Marszałkowska 10": GeoPoint(52.2297, 21.0122, "Śródmieście", "Marszałkowska 10, Śródmieście, Warszawa"),
