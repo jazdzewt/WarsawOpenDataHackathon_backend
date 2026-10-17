@@ -15,7 +15,7 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False
 
 def init_db() -> None:
     # Importing the models registers them on Base.metadata.
-    from app.models import item  # noqa: F401
+    from app.models import user, user_session  # noqa: F401
 
     Base.metadata.create_all(bind=engine)
 
