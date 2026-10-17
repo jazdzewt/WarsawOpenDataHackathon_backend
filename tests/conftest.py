@@ -1,15 +1,20 @@
+import os
 from collections.abc import Iterator
 
-import pytest
-from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
+# Klucz JWT musi być ustawiony PRZED importem aplikacji, bo ustawienia są ładowane
+# przy starcie. Testowy klucz nadpisuje wartość z lokalnego środowiska.
+os.environ["JWT_SECRET_KEY"] = "test-only-secret-key-with-at-least-32-chars"
 
-from app.db.base import Base
-from app.db.session import get_db
-from app.main import app
-from app.models import item  # noqa: F401  (registers Item on Base.metadata)
+import pytest  # noqa: E402
+from fastapi.testclient import TestClient  # noqa: E402
+from sqlalchemy import create_engine  # noqa: E402
+from sqlalchemy.orm import sessionmaker  # noqa: E402
+from sqlalchemy.pool import StaticPool  # noqa: E402
+
+from app.db.base import Base  # noqa: E402
+from app.db.session import get_db  # noqa: E402
+from app.main import app  # noqa: E402
+from app.models import user, user_session  # noqa: E402,F401  (rejestruje modele w Base.metadata)
 
 
 @pytest.fixture
